@@ -279,7 +279,6 @@ cmd_gzip = (cat $(filter-out FORCE,$^) | gzip -n -f -9 > $@) || \
 DTC ?= $(objtree)/scripts/dtc/dtc
 
 # Disable noisy checks by default
-ifeq ($(KBUILD_ENABLE_EXTRA_GCC_CHECKS),)
 DTC_FLAGS += -Wno-unit_address_vs_reg \
 	-Wno-avoid_default_addr_size \
 	-Wno-reg_format \
@@ -288,7 +287,6 @@ DTC_FLAGS += -Wno-unit_address_vs_reg \
 	-Wno-pci_bridge \
 	-Wno-pci_device_bus_num \
 	-Wno-pci_device_reg
-endif
 
 ifeq ($(KBUILD_ENABLE_EXTRA_GCC_CHECKS),2)
 DTC_FLAGS += -Wnode_name_chars_strict \
