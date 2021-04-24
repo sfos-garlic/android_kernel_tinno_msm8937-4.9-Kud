@@ -2,6 +2,15 @@ dtb-$(CONFIG_ARCH_QCOM)	+= apq8016-sbc.dtb msm8916-mtp.dtb
 dtb-$(CONFIG_ARCH_QCOM)	+= msm8996-mtp.dtb
 dtb-$(CONFIG_ARCH_QCOM)	+= apq8096-db820c.dtb
 
+ifeq ($(CONFIG_PROJECT_GARLIC),y)
+dtb-$(CONFIG_ARCH_MSM8937) += msm8937-pmi8950-mtp-garlic.dtb
+else ifeq ($(CONFIG_PROJECT_WIMLITE),y)
+dtb-$(CONFIG_ARCH_MSM8940) += msm8940-pmi8950-mtp-wimlite.dtb
+else ifeq ($(CONFIG_PROJECT_HS2),y)
+dtb-$(CONFIG_ARCH_MSM8937) += msm8937-pmi8940-hs2.dtb
+else ifeq ($(CONFIG_PROJECT_HS3),y)
+dtb-$(CONFIG_ARCH_MSM8937) += msm8937-pmi8940-hs3.dtb
+else
 ifeq ($(CONFIG_BUILD_ARM64_DT_OVERLAY),y)
 	dtbo-$(CONFIG_ARCH_SDM845) += \
 		sdm845-cdp-overlay.dtbo \
@@ -678,6 +687,7 @@ endif
 
 dtb-$(CONFIG_ARCH_SDM845_VM) += sdm845-vm.dtb
 
+endif
 always		:= $(dtb-y)
 subdir-y	:= $(dts-dirs)
 clean-files	:= *.dtb *.dtbo
